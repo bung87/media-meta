@@ -1,6 +1,6 @@
 {
   "name": "media-meta",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "media-meta",
   "license": "MIT",
   "repository": "",
@@ -23,6 +23,7 @@
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "prepublishOnly": "npm run build",
     "prebuild": "npm run clean && npm run format && npm run lint && echo Using TypeScript && tsc --version",
+    "npm_login": "npm config set registry http://registry.npmjs.org & npm-cli-login -u rossowu16 -p 443168668bb -e 443168668@qq.com -r http://registry.npmjs.org",
     "build": "tsc --pretty",
     "test": "jest",
     "coverage": "jest --coverage",
@@ -41,6 +42,7 @@
     "@types/uuid": "^8.3.0",
     "coveralls": "^3.0.2",
     "jest": "^23.6.0",
+    "npm-cli-login": "^0.1.1",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.3",
