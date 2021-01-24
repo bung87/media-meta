@@ -23,7 +23,6 @@
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "prepublishOnly": "npm run build",
     "prebuild": "npm run clean && npm run format && npm run lint && echo Using TypeScript && tsc --version",
-    "npm_login": "npm config set registry http://registry.npmjs.org & npm-cli-login -u rossowu16 -p 443168668bb -e 443168668@qq.com -r http://registry.npmjs.org",
     "build": "tsc --pretty",
     "test": "jest",
     "coverage": "jest --coverage",

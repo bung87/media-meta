@@ -7,12 +7,12 @@ import { getMetaData as fontMetaData } from './font';
 import { getMetaData as videoMetaData, getScreenshot } from './video';
 
 interface IMediaType {
-  formatName: string | any;
-  startTime: number | any;
-  duration: number | any;
-  size: number | any;
-  path: string | any;
-  bitRate: number | any;
+  formatName: string;
+  startTime: number;
+  duration: number;
+  size: number;
+  path: string;
+  bitRate: number;
 }
 
 export async function getAudioMetaData(path: string): Promise<IMediaType> {
