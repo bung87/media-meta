@@ -6,10 +6,17 @@
 import ffmpeg, { ffprobe } from 'fluent-ffmpeg';
 import { promisify } from 'util';
 import { v1 as uuidV1 } from 'uuid';
+import path from 'path';
 
+const ffprobeAsync = promisify(ffprobe)
+
+/**
+ * 
+ * @param params .size: '320x320'
+ */
 export async function getScreenshot(params: {
-  path: string;
-  savePath?: string;
+  inputPath: string;
+  outDir?: string;
   size?: string;
   fileName?: string;
 }): Promise<string> {
@@ -20,10 +27,10 @@ export async function getScreenshot(params: {
     if (!params.size) {
       params.size = '320x320';
     }
-    if (!params.savePath) {
-      params.savePath = '.';
+    if (!params.outDir) {
+      params.outDir = '.';
     }
-    const proc = ffmpeg(params.path);
+    const proc = ffmpeg(params.inputPath);
     proc.takeScreenshots(
       {
         count: 1,
@@ -31,9 +38,9 @@ export async function getScreenshot(params: {
         size: params.size,
         timemarks: ['2'],
       },
-      params.savePath
+      params.outDir
     ).on("end", () => {
-      const retPath = params.savePath + '/' + params.fileName;
+      const retPath = path.join(params.outDir , params.fileName);
       resove(retPath)
     }).on('error', (err) => {
       reject(err)
@@ -45,5 +52,5 @@ export async function getScreenshot(params: {
 
 export async function getMetaData(path: string): Promise<any> {
   // @ts-ignore
-  return promisify(ffprobe)(path);
+  return ffprobeAsync(path);
 }

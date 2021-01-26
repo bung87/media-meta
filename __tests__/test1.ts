@@ -19,7 +19,7 @@ async function main() {
   const path3 = path.join(__dirname, 'example/', 'OpenSans-Regular.ttf');
   const a = await getAudioMetaData(path1);
   const b = await getVideoMetaData(path2);
-  const c = await getVideoScreenshot({ path: path2 });
+  const c = await getVideoScreenshot({ inputPath: path2 });
   const d = await getFontMetaData(path3);
   expect(fs.existsSync(path.resolve(c))).toEqual(true)
   fs.unlinkSync(c)

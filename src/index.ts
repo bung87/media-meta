@@ -90,8 +90,8 @@ export async function getVideoMetaData(
 }
 
 export async function getVideoScreenshot(params: {
-  path: string;
-  savePath?: string;
+  inputPath: string;
+  outDir?: string;
   size?: string;
   fileName?: string;
 }): Promise<string> {
