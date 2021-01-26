@@ -9,7 +9,7 @@ import {
   getVideoMetaData,
   getVideoScreenshot,
   getFontMetaData,
-} from '../src/main';
+} from '../src/index';
 import path from 'path';
 async function main() {
   const path1 = path.join(__dirname, 'example/', 'file_example_MP3_1MG.mp3');
