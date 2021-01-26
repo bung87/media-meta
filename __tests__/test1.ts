@@ -21,8 +21,8 @@ async function main() {
   const b = await getVideoMetaData(path2);
   const c = await getVideoScreenshot({ inputPath: path2 });
   const d = await getFontMetaData(path3);
-  expect(fs.existsSync(path.resolve(c))).toEqual(true)
-  fs.unlinkSync(c)
+  expect(fs.existsSync(path.resolve(c))).toEqual(true);
+  fs.unlinkSync(c);
   console.log(a);
   console.log(b);
   console.log(c);
@@ -30,5 +30,5 @@ async function main() {
   return 1;
 }
 test('main', async () => {
-  await main()
-})
+  await main();
+});

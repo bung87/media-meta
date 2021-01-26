@@ -96,7 +96,7 @@ export async function getVideoScreenshot(params: {
   fileName?: string;
 }): Promise<string> {
   try {
-    const shotPath = await getScreenshot(params)
+    const shotPath = await getScreenshot(params);
     return shotPath;
   } catch (error) {
     throw error;

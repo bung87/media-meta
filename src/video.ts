@@ -8,10 +8,10 @@ import { promisify } from 'util';
 import { v1 as uuidV1 } from 'uuid';
 import path from 'path';
 
-const ffprobeAsync = promisify(ffprobe)
+const ffprobeAsync = promisify(ffprobe);
 
 /**
- * 
+ *
  * @param params .size: '320x320'
  */
 export async function getScreenshot(params: {
@@ -31,21 +31,23 @@ export async function getScreenshot(params: {
       params.outDir = '.';
     }
     const proc = ffmpeg(params.inputPath);
-    proc.takeScreenshots(
-      {
-        count: 1,
-        filename: params.fileName,
-        size: params.size,
-        timemarks: ['2'],
-      },
-      params.outDir
-    ).on("end", () => {
-      const retPath = path.join(params.outDir , params.fileName);
-      resove(retPath)
-    }).on('error', (err) => {
-      reject(err)
-    });
-
+    proc
+      .takeScreenshots(
+        {
+          count: 1,
+          filename: params.fileName,
+          size: params.size,
+          timemarks: ['2'],
+        },
+        params.outDir
+      )
+      .on('end', () => {
+        const retPath = path.join(params.outDir, params.fileName);
+        resove(retPath);
+      })
+      .on('error', err => {
+        reject(err);
+      });
   });
   return ret;
 }
