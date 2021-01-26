@@ -30,7 +30,11 @@
     "watch:test": "jest --watch"
   },
   "dependencies": {
+    "filesize": "^6.1.0",
     "fluent-ffmpeg": "^2.1.2",
+    "humanize-duration": "^3.25.1",
+    "prettybandwidth": "^1.1.0",
+    "seconds-formater": "^1.2.0",
     "ttfinfo": "^0.2.0",
     "uuid": "8.3.0"
   },
