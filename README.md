@@ -1,3 +1,12 @@
+# media-meta [![Build Status](https://travis-ci.org/[object Object]/.svg?branch=master)](https://travis-ci.org/[object Object]/) [![Npm Version](https://badgen.net/npm/v/media-meta)](https://www.npmjs.com/package/media-meta) ![npm: total downloads](https://badgen.net/npm/dt/media-meta) ![Types](https://badgen.net/npm/types/media-meta) ![Dep](https://badgen.net/david/dep/[object Object]/) ![license](https://badgen.net/npm/license/media-meta)  
+
+## Installation
+
+`yarn add media-meta`  
+
+or  
+
+`npm i --save media-meta`  
 
 
 ```ts

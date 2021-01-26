@@ -11,6 +11,8 @@ import {
   getFontMetaData,
 } from '../src/index';
 import path from 'path';
+import fs from 'fs';
+
 async function main() {
   const path1 = path.join(__dirname, 'example/', 'file_example_MP3_1MG.mp3');
   const path2 = path.join(__dirname, 'example/', 'big_buck_bunny_240p_1mb.mp4');
@@ -19,16 +21,14 @@ async function main() {
   const b = await getVideoMetaData(path2);
   const c = await getVideoScreenshot({ path: path2 });
   const d = await getFontMetaData(path3);
-
-  console.log('***********************88');
+  expect(fs.existsSync(path.resolve(c))).toEqual(true)
+  fs.unlinkSync(c)
   console.log(a);
   console.log(b);
   console.log(c);
   console.log(d);
-  console.log('***********************88');
   return 1;
 }
-
-main()
-  .then(console.log)
-  .catch(console.error);
+test('main', async () => {
+  await main()
+})
