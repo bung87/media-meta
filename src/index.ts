@@ -3,7 +3,7 @@
  */
 
 import { getMetaData as audioMetaData } from './audio';
-import { getMetaData as fontMetaData } from './font';
+import { fontMeta, getMetaData as fontMetaData } from './font';
 import { getMetaData as videoMetaData, getScreenshot } from './video';
 import prettyb from 'prettybandwidth';
 import filesize from 'filesize';
@@ -103,12 +103,9 @@ export async function getVideoScreenshot(params: {
   }
 }
 
-export async function getFontMetaData(filePath: string): Promise<any> {
+export async function getFontMetaData(filePath: string): Promise<fontMeta> {
   try {
     const fontMeta = await fontMetaData(filePath);
-    // console.log(fontMeta)
-    // const ret = Object.values(fontMeta.tables.name);
-    // console.log(ret)
     return fontMeta;
   } catch (error) {
     throw error;

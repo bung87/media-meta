@@ -7,7 +7,7 @@ import { promisify } from 'util';
 
 const ttfInfoAsync = promisify(ttfInfo);
 
-interface fontMeta {
+export interface fontMeta {
   copyright: string;
   fontFamily: string;
   fontSubFamily: string;
