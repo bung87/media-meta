@@ -17,7 +17,7 @@ export async function getScreenshot(params: {
   outDir?: string;
   size?: string;
   fileName?: string;
-  binPath?: string
+  binPath?: string;
 }): Promise<string> {
   const ret = new Promise<string>((resove, reject) => {
     if (!params.fileName) {
@@ -30,7 +30,7 @@ export async function getScreenshot(params: {
       params.outDir = '.';
     }
     if (params.binPath) {
-      ffmpeg.setFfmpegPath(params.binPath)
+      ffmpeg.setFfmpegPath(params.binPath);
     }
     const proc = ffmpeg(params.inputPath);
     proc

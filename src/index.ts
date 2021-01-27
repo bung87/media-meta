@@ -13,9 +13,12 @@ import { promisify } from 'util';
 
 const ffprobeAsync = promisify(ffprobe);
 
-export async function getMediaMetaData(path: string, binPath?: string): Promise<ffmpeg.FfprobeData> {
+export async function getMediaMetaData(
+  path: string,
+  binPath?: string
+): Promise<ffmpeg.FfprobeData> {
   if (binPath) {
-    ffmpeg.setFfprobePath(binPath)
+    ffmpeg.setFfprobePath(binPath);
   }
   // @ts-ignore
   return ffprobeAsync(path);
@@ -54,10 +57,12 @@ interface IMediaType {
 export async function getAudioMetaData(
   filePath: string,
   humanReadable = true,
-  binPath?:string
+  binPath?: string
 ): Promise<IMediaType> {
   try {
-    const audioMeta = binPath ? await getMediaMetaData(filePath,binPath) :await getMediaMetaData(filePath);
+    const audioMeta = binPath
+      ? await getMediaMetaData(filePath, binPath)
+      : await getMediaMetaData(filePath);
     const ad = audioMeta.format;
     const ret = {
       bitRate: humanReadable
@@ -84,10 +89,12 @@ export async function getAudioMetaData(
 export async function getVideoMetaData(
   filePath: string,
   humanReadable = true,
-  binPath?:string
+  binPath?: string
 ): Promise<IMediaType> {
   try {
-    const videoMeta = binPath ? await getMediaMetaData(filePath,binPath) :await getMediaMetaData(filePath);
+    const videoMeta = binPath
+      ? await getMediaMetaData(filePath, binPath)
+      : await getMediaMetaData(filePath);
     const vd = videoMeta.format;
     const ret = {
       bitRate: humanReadable
@@ -113,7 +120,7 @@ export async function getVideoScreenshot(params: {
   outDir?: string;
   size?: string;
   fileName?: string;
-  binPath?: string
+  binPath?: string;
 }): Promise<string> {
   try {
     const shotPath = await getScreenshot(params);
