@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - 'node' # use latest stable nodejs version
+before_script:
+  - sudo apt-get install libav-tools
 script:
   - yarn coverage # jest test with coverage flag does coverage too
 after_script:
