@@ -3,22 +3,21 @@
  * @date 2020/07/21 13:40
  */
 
-import ffmpeg, { ffprobe } from 'fluent-ffmpeg';
-import { promisify } from 'util';
+import ffmpeg from 'fluent-ffmpeg';
 import { v1 as uuidV1 } from 'uuid';
 import path from 'path';
-
-const ffprobeAsync = promisify(ffprobe);
 
 /**
  *
  * @param params .size: '320x320'
+ * @param binPath ffmpeg bin path
  */
 export async function getScreenshot(params: {
   inputPath: string;
   outDir?: string;
   size?: string;
   fileName?: string;
+  binPath?: string
 }): Promise<string> {
   const ret = new Promise<string>((resove, reject) => {
     if (!params.fileName) {
@@ -29,6 +28,9 @@ export async function getScreenshot(params: {
     }
     if (!params.outDir) {
       params.outDir = '.';
+    }
+    if (params.binPath) {
+      ffmpeg.setFfmpegPath(params.binPath)
     }
     const proc = ffmpeg(params.inputPath);
     proc
@@ -50,9 +52,4 @@ export async function getScreenshot(params: {
       });
   });
   return ret;
-}
-
-export async function getMetaData(path: string): Promise<any> {
-  // @ts-ignore
-  return ffprobeAsync(path);
 }

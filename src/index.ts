@@ -2,13 +2,24 @@
  * @author rosso
  */
 
-import { getMetaData as audioMetaData } from './audio';
 import { fontMeta, getMetaData as fontMetaData } from './font';
-import { getMetaData as videoMetaData, getScreenshot } from './video';
+import { getScreenshot } from './video';
 import prettyb from 'prettybandwidth';
 import filesize from 'filesize';
 import humanizeDuration from 'humanize-duration';
 import path from 'path';
+import ffmpeg, { ffprobe } from 'fluent-ffmpeg';
+import { promisify } from 'util';
+
+const ffprobeAsync = promisify(ffprobe);
+
+export async function getMediaMetaData(path: string, binPath?: string): Promise<ffmpeg.FfprobeData> {
+  if (binPath) {
+    ffmpeg.setFfprobePath(binPath)
+  }
+  // @ts-ignore
+  return ffprobeAsync(path);
+}
 
 const shortEnglishHumanizer = humanizeDuration.humanizer({
   language: 'shortEn',
@@ -37,12 +48,16 @@ interface IMediaType {
   bitRate: number | string;
 }
 
+/**
+ * @param binPath ffprobe path
+ */
 export async function getAudioMetaData(
   filePath: string,
-  humanReadable = true
+  humanReadable = true,
+  binPath?:string
 ): Promise<IMediaType> {
   try {
-    const audioMeta = await audioMetaData(filePath);
+    const audioMeta = binPath ? await getMediaMetaData(filePath,binPath) :await getMediaMetaData(filePath);
     const ad = audioMeta.format;
     const ret = {
       bitRate: humanReadable
@@ -63,12 +78,16 @@ export async function getAudioMetaData(
   }
 }
 
+/**
+ * @param binPath ffprobe path
+ */
 export async function getVideoMetaData(
   filePath: string,
-  humanReadable = true
+  humanReadable = true,
+  binPath?:string
 ): Promise<IMediaType> {
   try {
-    const videoMeta = await videoMetaData(filePath);
+    const videoMeta = binPath ? await getMediaMetaData(filePath,binPath) :await getMediaMetaData(filePath);
     const vd = videoMeta.format;
     const ret = {
       bitRate: humanReadable
@@ -94,6 +113,7 @@ export async function getVideoScreenshot(params: {
   outDir?: string;
   size?: string;
   fileName?: string;
+  binPath?: string
 }): Promise<string> {
   try {
     const shotPath = await getScreenshot(params);
