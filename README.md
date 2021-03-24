@@ -1,5 +1,7 @@
 # media-meta [![Build Status](https://travis-ci.org/bung87/media-meta.svg?branch=main)](https://travis-ci.org/bung87/media-meta/) [![Npm Version](https://badgen.net/npm/v/media-meta)](https://www.npmjs.com/package/media-meta) ![npm: total downloads](https://badgen.net/npm/dt/media-meta) ![Types](https://badgen.net/npm/types/media-meta) ![Dep](https://badgen.net/david/dep/bung87/media-meta) ![license](https://badgen.net/npm/license/media-meta)  
 
+This is a side project of my electron based application. For fonts, audios, videos resources meta data and video screenshot. The default behavior is it will call system-wide `ffmpeg`(for screenshot) and `ffprobe`(for media meta) binary, for bundle with electron recommand libs are `ffprobe-static-electron` and `ffmpeg-static-electron`, there's a good example application [autoEdit_2](https://github.com/OpenNewsLabs/autoEdit_2), Please check [https://github.com/OpenNewsLabs/autoEdit_2/blob/master/package.json](https://github.com/OpenNewsLabs/autoEdit_2/blob/master/package.json) for configuration of `electron-builder`
+
 ## Installation
 
 `yarn add media-meta`  
